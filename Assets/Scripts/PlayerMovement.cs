@@ -41,37 +41,4 @@ public class PlayerMovement : MonoBehaviour
             anim.SetBool("move", false);
         }
     }
-
-    private void OnBecameInvisible()
-    {
-        //Debug.Log("FUERA DE CAMARA");
-        Vector3 actualPos = transform.position;
-
-        // Derecha
-        if (actualPos[0] >= 18)
-        {
-            //Debug.Log("DERECHA");
-            actualPos[0] = actualPos[0] * -1f;
-        }
-        // Izquierda
-        else if (actualPos[0] <= -18)
-        {
-            //Debug.Log("iZQUIERDA");
-            actualPos[0] = actualPos[0] * -1f;
-        }
-        // Arriba
-        if (actualPos[1] >= 10)
-        {
-            //Debug.Log("ARRIBA");
-            actualPos[1] = actualPos[1] * -1f;
-        }
-        // Abajo
-        else if (actualPos[1] <= -10)
-        {
-            //Debug.Log("ABAJO");
-            actualPos[1] = actualPos[1] * -1f;
-        }
-
-        transform.position = actualPos;
-    }
 }
