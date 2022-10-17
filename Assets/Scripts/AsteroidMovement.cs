@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class AsteroidMovement : MonoBehaviour
 {
-    public Rigidbody2D rb;
-
+    private Rigidbody2D rb;
+    [Header("Opciones de Sprites")]
+    public Sprite[] Sprites; 
+    [Header("Tiempo hasta desaparecer")]
+    public float Duration = 10f;
     [Header("Maximo y Minimo de la velocidad aleatoria")]
     public float MaxSpeed = 200;
     public float MinSpeed = 125;
@@ -16,38 +19,21 @@ public class AsteroidMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
 
+        int rand;
+        rand = Random.Range(0, Sprites.Length);
+        GetComponent<SpriteRenderer>().sprite = Sprites[rand];
+
+
         speed = Random.Range(MaxSpeed,MinSpeed);
 
-        if (transform.position[1] >= 11.5)
-        {
-            rb.AddForce(-transform.up * speed);
-        }
-        else if(transform.position[1] <= -11.5)
-        {
-            rb.AddForce(transform.up * speed);
-        }
-        else if (transform.position[0] >= 5)
-        {
-            rb.AddForce(-transform.right * speed);
-        }
-        else if (transform.position[0] <= -5)
-        {
-            rb.AddForce(transform.right * speed);
-        }
-        else
-        {
-            rb.AddForce(-transform.up * speed);
-        }
-
+        rb.AddForce(transform.up * speed);
+      
         angle = Random.Range(-0.3f, 0.3f);
     }
 
     private void Update()
     {
         transform.rotation = transform.rotation * Quaternion.Euler(0, 0, angle);
-    }
-    private void OnBecameInvisible()
-    {
-        Destroy(this.gameObject);
+        Destroy(this.gameObject, Duration);
     }
 }
