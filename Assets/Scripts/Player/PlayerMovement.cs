@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Activar/Desactivar muerte")]
     public bool canDie = true;
+    bool Dead = false;
     [Header(" --> Se multiplican x100 las velocidades <-- ")]
     public float rotationSpeed = 2f;
     public float movementSpeed = 6f;
@@ -24,23 +25,25 @@ public class PlayerMovement : MonoBehaviour
         float rSpeed = rotationSpeed * 100;
         float mSpeed = movementSpeed * 100;
 
-
-        // MOVIMIENTO
-        float vertical = Input.GetAxis("Vertical");
-        if (Input.GetAxis("Vertical") > 0)
+        if (!Dead)
         {
-            rb.AddForce(vertical * mSpeed * transform.up * Time.deltaTime);
-        }
+            // MOVIMIENTO
+            float vertical = Input.GetAxis("Vertical");
+            if (Input.GetAxis("Vertical") > 0)
+            {
+                rb.AddForce(vertical * mSpeed * transform.up * Time.deltaTime);
+            }
 
-        rb.rotation += -Input.GetAxis("Horizontal") * rSpeed * Time.deltaTime;
+            rb.rotation += -Input.GetAxis("Horizontal") * rSpeed * Time.deltaTime;
 
-        if(Input.GetAxis("Vertical") > 0 || Input.GetAxis("Horizontal") > 0 || Input.GetAxis("Horizontal") < 0)
-        {
-            anim.SetBool("move", true);
-        }
-        else
-        {
-            anim.SetBool("move", false);
+            if (Input.GetAxis("Vertical") > 0 || Input.GetAxis("Horizontal") > 0 || Input.GetAxis("Horizontal") < 0)
+            {
+                anim.SetBool("move", true);
+            }
+            else
+            {
+                anim.SetBool("move", false);
+            }
         }
     }
 
@@ -49,7 +52,29 @@ public class PlayerMovement : MonoBehaviour
         if(collision.tag == "Asteroid" && canDie)
         {
             Debug.Log("COLISION CON ASTEROIDE");
-            Destroy(this.gameObject);
+            GameManager.instance.vidas -= 1;
+
+            if (GameManager.instance.vidas >= 1)
+            {
+                GameManager.instance.clip.Play();
+                transform.position = new Vector3(0, 0, 0);
+                rb.velocity = new Vector2(0, 0);
+            }
+            
+            if (GameManager.instance.vidas == 0)
+            {
+                StartCoroutine(Die());
+            }
         }
+    }
+
+    IEnumerator Die()
+    {
+        anim.SetTrigger("dead");
+        AudioSource Aclip = this.GetComponent<AudioSource>();
+        Aclip.Play();
+        Dead = true;
+        yield return  new WaitForSeconds(1);
+        Time.timeScale = 0;
     }
 }

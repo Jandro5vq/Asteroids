@@ -16,7 +16,7 @@ public class ShieldLogic : MonoBehaviour
 
     void Update()
     {
-        transform.rotation = transform.rotation * Quaternion.Euler(0, 0, rotacion);
+        transform.rotation = transform.rotation * Quaternion.Euler(0, 0, rotacion * Time.deltaTime);
         TempTime += Time.deltaTime;
         if (Duracion <= TempTime)
         {

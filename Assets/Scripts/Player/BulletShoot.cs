@@ -8,9 +8,12 @@ public class BulletShoot : MonoBehaviour
 
     private float delay = 1f;
 
+    AudioSource shot;
+
     // Start is called before the first frame update
     void Start()
     {
+        shot = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -21,9 +24,10 @@ public class BulletShoot : MonoBehaviour
             delay -= Time.deltaTime;
         }
 
-        if (Input.GetKey(KeyCode.Space) && delay <= 0)
+        if (Input.GetKey(KeyCode.Space) && delay <= 0 && GameManager.instance.vidas > 0)
         {
                 delay = 0.15f;  // this is the interval between firing.
+                shot.Play();
                 Instantiate(Bullet, new Vector3(transform.position.x, transform.position.y, 0), transform.rotation);
         }
     }

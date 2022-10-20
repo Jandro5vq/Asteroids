@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class EnemySpawner : MonoBehaviour
 {
+    [Header("Prefab Nave Enemiga")]
     public GameObject NaveEnemiga;
     GameObject Nave;
     float TempTime = 60f;
@@ -16,7 +14,7 @@ public class EnemySpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        int pts = Nave.GetComponent<PointManager>().Points;
+        int pts = GameManager.instance.puntos;
 
         if (Time.fixedTime >= TempTime)
         {

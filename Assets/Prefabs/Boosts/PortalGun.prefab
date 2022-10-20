@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2788727720189722698}
   - component: {fileID: 2788727720189722695}
   - component: {fileID: 2788727720189722688}
-  - component: {fileID: 2788727720189722689}
+  - component: {fileID: 4208778201468085633}
   m_Layer: 0
   m_Name: PortalGun
   m_TagString: Boost
@@ -109,7 +109,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 3
+  m_Constraints: 0
 --- !u!60 &2788727720189722698
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -182,7 +182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time: 20
---- !u!114 &2788727720189722689
+--- !u!114 &4208778201468085633
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -191,7 +191,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2788727720189722699}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1f785cdd006a584ea4c403e9f84520d, type: 3}
+  m_Script: {fileID: 11500000, guid: e508b1d09f671d54db626fd078f84397, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PortalGun: 1
+  MeeseeksBox: 0
+  Plumbus: 0
   force: 200

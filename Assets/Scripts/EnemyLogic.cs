@@ -35,14 +35,25 @@ public class EnemyLogic : MonoBehaviour
             Quaternion Rotation = Quaternion.Euler(0, 0, Random.Range(0,360));
             Instantiate(EBullet, new Vector3(transform.position.x, transform.position.y, 0), Rotation);
         }
+
+        Destroy(this.gameObject, 20f);
     }
 
-        private int RandomSign()
+    private int RandomSign()
     {
         if (Random.Range(0, 2) == 0)
         {
             return -1;
         }
         return 1;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Bullet"))
+        {
+            GameManager.instance.puntos += 50;
+            Destroy(this.gameObject);
+        }
     }
 }

@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class BoostManager : MonoBehaviour
 {
+    [Header("Boosts Prefabs")]
     public GameObject[] Items;
 
+    [Header("Spawn Probability")]
     [Range(1, 100)]
     public int Probability = 1;
 
