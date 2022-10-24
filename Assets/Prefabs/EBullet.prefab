@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6609339263078736114}
   m_Layer: 0
   m_Name: EBullet
-  m_TagString: Untagged
+  m_TagString: EBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

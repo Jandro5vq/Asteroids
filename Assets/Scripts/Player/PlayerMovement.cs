@@ -49,21 +49,23 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Asteroid" && canDie)
+        if(canDie)
         {
-            Debug.Log("COLISION CON ASTEROIDE");
-            GameManager.instance.vidas -= 1;
+            if (collision.tag == "Asteroid" || collision.tag == "Ebullet" || collision.tag == "Enemy")
+            {
+                GameManager.instance.vidas -= 1;
 
-            if (GameManager.instance.vidas >= 1)
-            {
-                GameManager.instance.clip.Play();
-                transform.position = new Vector3(0, 0, 0);
-                rb.velocity = new Vector2(0, 0);
-            }
-            
-            if (GameManager.instance.vidas == 0)
-            {
-                StartCoroutine(Die());
+                if (GameManager.instance.vidas >= 1)
+                {
+                    GameManager.instance.clip.Play();
+                    transform.position = new Vector3(0, 0, 0);
+                    rb.velocity = new Vector2(0, 0);
+                }
+
+                if (GameManager.instance.vidas == 0)
+                {
+                    StartCoroutine(Die());
+                }
             }
         }
     }
